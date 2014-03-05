@@ -11,5 +11,16 @@ public class ListaDeTareas implements IDashboard{
 	{
 		return true;
 	}
+	@Override
+	public boolean remover(Tarea tarea) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	public Tarea[] getListaDeTareas() {
+		return listaDeTareas;
+	}
+	public void setListaDeTareas(Tarea[] listaDeTareas) {
+		this.listaDeTareas = listaDeTareas;
+	}
 
 }
