@@ -20,13 +20,12 @@ public class Dashboard implements IDashboard {
 	}
 
 	public void ensureCapacity(int minCapacity) {
-		modCount++;
+		setModCount(getModCount() + 1);
 		int oldCapacity = tasks.length;
-		if (minCapacity > oldCapacity) {
+		if(minCapacity > oldCapacity) {
 			int newCapacity = (oldCapacity * 3) / 2 + 1;
-			if (newCapacity < minCapacity)
+			if(newCapacity < minCapacity)
 				newCapacity = minCapacity;
-			// minCapacity is usually close to size, so this is a win:
 			tasks = Arrays.copyOf(tasks, newCapacity);
 		}
 	}
@@ -62,12 +61,11 @@ public class Dashboard implements IDashboard {
 	}
 
 	public void clear() {
-		modCount++;
-
-		// Let gc do its work
-		for (int i = 0; i < size; i++)
+setModCount(getModCount() + 1);
+		
+		for(int i = 0; i < size; i++)
 			tasks[i] = null;
-
+		
 		size = 0;
 	}
 
@@ -81,5 +79,11 @@ public class Dashboard implements IDashboard {
 
 	public Dashboard() {
 		this(10);
+	}
+	public int getModCount() {
+		return modCount;
+	}
+	public void setModCount(int modCount) {
+		this.modCount = modCount;
 	}
 }

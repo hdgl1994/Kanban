@@ -2,12 +2,6 @@ package Kanban;
 
 import java.util.Date;
 
-/**
- * Group of actions related to specific goal.
- * 
- * @author vjmorale
- * 
- */
 public class Task {
 	private String title;
 	private String description;
@@ -24,18 +18,32 @@ public class Task {
 	}
 
 	public Task(String title) {
-		this(title, State.BACKLOG);
+		this(title, State.BACKLOG,(short) 1);
 		System.out.println("starting Task(String) ctor...");
 	}
-
-	public Task(String title, State state) {
+	public Task(String title, short priority) {
+		this(title, State.BACKLOG, priority);
+		System.out.println("starting Task(String, Priority) ctor...");
+	}
+	
+	public Task(String title,State state) {
 		super();
 		System.out.println("starting Task(String, State) ctor...");
 		
 		this.title = title;
 		createDate = new Date();
 		priority = 1;
-		this.state = state;
+		this.state  = state;
+	}
+	
+	public Task(String title,State state, short priority){
+		super();
+		System.out.println("starting Task(String, State,Priority) ctor...");
+		
+		this.title = title;
+		createDate = new Date();
+		this.priority = priority;
+		this.state  = state;
 	}
 
 	public String getTitle() {
@@ -43,8 +51,8 @@ public class Task {
 	}
 
 	public void setTitle(String title) {
-		if (title != null) {
-			this.title = title;
+		if(title != null) {
+		this.title = title;
 		}
 	}
 
@@ -103,18 +111,27 @@ public class Task {
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
-
+	
 	public String toString() {
 		return this.title;
 	}
-
+	
 	public boolean equals(Object obj) {
 		if (obj != null) {
-			if (obj instanceof Task) {
+			if(obj instanceof Task) {
 				return title.equals(((Task) obj).getTitle());
 			}
 		}
 		return false;
 	}
-
+	
+	public boolean save() {
+		try{
+			Thread.sleep(1*1000);
+		} catch(InterruptedException e){
+			e.printStackTrace();
+		}
+		return true;
+		
+	}
 }

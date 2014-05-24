@@ -1,17 +1,23 @@
 package Kanban;
 
+import java.util.Date;
 
 public class Program {
 
+	
+	public static IDashboard dashboard = new DashboardList();
 	public static void main(String[] args) throws Exception {
-		Task task;
-		IDashboard dashboard = new DashboardList();
-		for (int i = 0; i < 15; i++) {
-			task = new Task("Task " + i, State.DO_TO);
-			if (dashboard.add(task)) {
-				System.out.println("Added " + task.getTitle());
-			}
+		System.out.println("Start" + new Date());
+		User user;
+		for(int i = 0; i < 15; i++){
+			user = new User();
+			user.setName("Title " + i);
+			int priority  =  1 + (int) (Math.random()*((10-1)+1));
+			user.setPriority(priority);
+			
+			user.start();
 		}
+		System.out.println("End " + new Date());
+			}
 	}
 
-}
