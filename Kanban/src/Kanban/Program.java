@@ -1,9 +1,9 @@
 package Kanban;
 
 import java.util.Date;
+import java.util.Random;
 
 public class Program {
-
 	
 	public static IDashboard dashboard = new DashboardList();
 	public static void main(String[] args) throws Exception {
@@ -18,6 +18,5 @@ public class Program {
 			user.start();
 		}
 		System.out.println("End " + new Date());
-			}
 	}
-
+}

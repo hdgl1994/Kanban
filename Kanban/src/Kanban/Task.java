@@ -3,6 +3,9 @@ package Kanban;
 import java.util.Date;
 
 public class Task {
+	
+	private final Object addSave = new Object();
+	
 	private String title;
 	private String description;
 	private State state;
@@ -11,12 +14,12 @@ public class Task {
 	private String owner;
 	private Date dueDate;
 	private Date createDate;
-
+	
 	public Task() {
 		this("");
 		System.out.println("starting Task() ctor...");
 	}
-
+	
 	public Task(String title) {
 		this(title, State.BACKLOG,(short) 1);
 		System.out.println("starting Task(String) ctor...");
@@ -125,13 +128,22 @@ public class Task {
 		return false;
 	}
 	
+	public boolean remove() {
+		synchronized(this){
+			return true;
+		}
+	}
+	
 	public boolean save() {
+		//
+		
+		synchronized (addSave){
 		try{
 			Thread.sleep(1*1000);
 		} catch(InterruptedException e){
 			e.printStackTrace();
 		}
 		return true;
-		
+		}
 	}
 }

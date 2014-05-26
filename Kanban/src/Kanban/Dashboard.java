@@ -2,23 +2,19 @@ package Kanban;
 
 import java.util.Arrays;
 
+
 public class Dashboard implements IDashboard {
 
 	private int size;
-	private transient Task[] tasks;
+	// transient is used along with instance variables to exclude them from serialization process
+	private transient Task[]tasks;
 	private transient int modCount = 0;
-
-	/**
-	 * Inserts the specified task at the specified position in this list. Shifts
-	 * the task currently at that position (if any) and any subsequent tasks to
-	 * the right (adds one to their indices).
-	 */
+	
 	public boolean add(Task task) {
 		ensureCapacity(size + 1);
 		tasks[size++] = task;
 		return true;
 	}
-
 	public void ensureCapacity(int minCapacity) {
 		setModCount(getModCount() + 1);
 		int oldCapacity = tasks.length;
@@ -29,54 +25,49 @@ public class Dashboard implements IDashboard {
 			tasks = Arrays.copyOf(tasks, newCapacity);
 		}
 	}
-
-	public boolean remove(Task task) {
-		if (task == null) {
-			for (int index = 0; index < size; index++)
-				if (tasks[index] == null) {
+	
+	public boolean remove(Task task){
+		if(task == null) {
+			for(int index = 0; index < size; index++)
+				if(tasks[index] == null) {
 					fastRemove(index);
 					return true;
 				}
 		} else {
 			for (int index = 0; index < size; index++)
-				if (task.equals(tasks[index])) {
+				if(task.equals(tasks[index])) {
 					fastRemove(index);
 					return true;
 				}
 		}
 		return false;
 	}
-
-	/**
-	 * Private remove method that skips bounds checking and does not return the
-	 * value removed.
-	 * 
-	 */
+	
 	private void fastRemove(int index) {
-		modCount++;
+		setModCount(getModCount() + 1);
 		int numMoved = size - index - 1;
-		if (numMoved > 0)
+		if(numMoved >0)
 			System.arraycopy(tasks, index + 1, tasks, index, numMoved);
-		tasks[--size] = null; // Let gc do its work
+		tasks[--size] = null;
 	}
-
+	
 	public void clear() {
-setModCount(getModCount() + 1);
+		setModCount(getModCount() + 1);
 		
 		for(int i = 0; i < size; i++)
 			tasks[i] = null;
 		
 		size = 0;
 	}
-
+	
 	public Dashboard(int initialCapacity) {
 		super();
-		if (initialCapacity < 0)
-			throw new IllegalArgumentException("Illegal Capacity: "
+		if(initialCapacity < 0)
+			throw new IllegalArgumentException("IllegalCapacity: "
 					+ initialCapacity);
 		this.tasks = new Task[initialCapacity];
 	}
-
+	
 	public Dashboard() {
 		this(10);
 	}
