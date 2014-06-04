@@ -115,8 +115,16 @@ public class Task {
 		this.createDate = createDate;
 	}
 	
-	public String toString() {
-		return this.title;
+	public String toHtml() {
+		return "<table><tr><td>Título:</tr></td>"
+				+ "<tr><td>Descripción:</td></tr>"
+				+ "<tr><td>Estado:</td></tr>"
+				+ "<tr><td>Categoría:</td></tr>"
+				+ "<tr><td>Prioridad:</td></tr>"
+				+ "<tr><td>Propietario:</td></tr>"
+				+ "<tr><td>Fecha de Entrega:</td></tr>"
+				+ "<tr><td>Fecha de Creación:</td></tr>"
+				+ "</table>";
 	}
 	
 	public boolean equals(Object obj) {
